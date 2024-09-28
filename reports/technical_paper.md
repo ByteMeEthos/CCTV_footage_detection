@@ -162,6 +162,50 @@ The model uses a **Generative Adversarial Network (GAN)** architecture, specific
 #### 6.2.3 Loss Functions
 
 - **Pixel-wise Loss**: Implements **L1 loss** for direct pixel comparison.
+
+  #### 6.2.3.2.1 PSNR (Peak Signal-to-Noise Ratio)
+
+  PSNR is a measure of the ratio between the maximum possible signal power and the power of noise that affects the image. It is expressed as:
+
+  \[
+  \text{PSNR} = 10 \cdot \log\_{10}\left(\frac{\text{MAX}^2}{\text{MSE}}\right)
+  \]
+
+  Where `MAX` is the maximum possible pixel value and `MSE` (Mean Squared Error) is the pixel-wise difference between the predicted and ground truth images. A higher PSNR indicates less distortion (higher image quality).
+
+  ***
+
+  #### 6.2.3.2.2 SSIM (Structural Similarity Index)
+
+  SSIM measures the similarity between two images by considering luminance, contrast, and structure. It is calculated over local patches of the image and ranges from -1 (no similarity) to 1 (perfect similarity).
+
+  Unlike PSNR, SSIM focuses more on structural and perceptual aspects of image quality.
+
+  ***
+
+  #### 6.2.3.2.3 The Combined Loss
+
+  The combined loss function incorporates both PSNR and SSIM into a weighted formula:
+
+  \[
+  \text{Loss} = \alpha \cdot (1 - \text{SSIM}) + (1 - \alpha) \cdot \left( \frac{1}{\text{PSNR}} \right)
+  \]
+
+  - The **SSIM** component ensures structural similarity between the reconstructed and original images, where \(1 - \text{SSIM}\) penalizes dissimilarity.
+  - The **PSNR** component measures pixel-wise accuracy, where a lower MSE results in a higher PSNR and thus a lower loss.
+
+  ***
+
+  #### 6.2.3.2.4 Alpha Parameter
+
+  The **alpha parameter** balances the contribution of SSIM and PSNR in the loss function.
+
+  - When \(\alpha = 0.5\), both metrics are equally weighted.
+  - A higher \(\alpha\) places more importance on structural similarity (SSIM).
+  - A lower \(\alpha\) places more importance on pixel-wise accuracy (PSNR).
+
+  ***
+
 - **Perceptual Loss**: Uses **VGG16** for feature extraction with frozen parameters.
 
 ---
@@ -212,6 +256,30 @@ The model uses a **Generative Adversarial Network (GAN)** architecture, specific
 ### 8.1 Preprocessing
 
 - Includes **noise reduction** and **Gaussian smoothing** for better image quality.
+
+### Gaussian Blur
+
+A **Gaussian blur** filter is applied to the input images to reduce image noise and detail. This helps in smoothing out irregularities in the pixel values. The filter uses a **Gaussian function** to calculate the transformation of each pixel, effectively reducing high-frequency components (noise) while retaining low-frequency details.
+
+The transformation is represented as:
+
+\[
+G(x, y) = \frac{1}{2\pi\sigma^2} \cdot e^{-\frac{x^2 + y^2}{2\sigma^2}}
+\]
+
+Where:
+
+- \(G(x, y)\) is the Gaussian kernel,
+- \(\sigma\) is the standard deviation controlling the extent of the blur,
+- \(x\) and \(y\) are pixel positions.
+
+---
+
+### Gaussian Smoothing
+
+**Gaussian smoothing** further smooths the images, removing local variations while preserving edges. It is essential for reducing noise while keeping important structures like facial features intact.
+
+Gaussian smoothing uses a convolution operation with a **Gaussian kernel** similar to Gaussian blur to achieve this effect.
 
 ### 8.2 Real-Time Processing
 
