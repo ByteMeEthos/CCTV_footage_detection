@@ -1,183 +1,259 @@
-Running Instructions :
+# CCTV Footage Detection
 
-For Windows :
+This repository contains code for CCTV footage detection using PyTorch.
 
-1. Using Conda environment
-   Make sure that conda is installed in the local system.
-   Create a Conda Environment. In the terminal, conda create --name virtualenv
-   Activating the conda environment - 1. In the command Pallete, select Python: Select Interpreter -> select virtualenv conda environment
-   OR 2.In the terminal, conda activte virtualenv
-   In the terminal:
-   For CPU : conda install pytorch torchvision cpuonly -c pytorch
-   For GPU : conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
-   Then clone the git repository - git clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
-   cd into the git directory - cd CCTV_footage_detection
-   Installing dependencies - pip install -r requirements.txt
-   cd into the inference folder - cd inference
-   Finally for the output - python run_inference.py
+## Installation and Running Instructions
 
-See the model results in data -> output directory
+Choose the appropriate method based on your operating system and preferred environment:
 
-2. Using python virtual environment
-   Create a virtual environment - python -m venv virtualenv
-   Activate the virtual environment - .\virtualenv\Scripts\activate
-   Clone the git repository - git clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
-   cd into the git directory - cd CCTV_footage_detection
-   Installing dependencies - pip install -r requirements.txt
-   cd into the inference folder - cd inference
-   Finally for the output - python run_inference.py
+### Windows
 
-See the model results in data -> output directory
+#### 1. Using Conda Environment
 
-CCTV Footage Detection - Installation and Running Instructions
-Installation Process Overview
-mermaidCopygraph TD
-A[Start] --> B[Choose Environment]
-B --> C[Conda]
-B --> D[Python venv]
-C --> E[Create Conda Environment]
-D --> F[Create Python venv]
-E --> G[Activate Environment]
-F --> G
-G --> H[Install Dependencies]
-H --> I[Clone Repository]
-I --> J[Run Inference]
-J --> K[View Results]
-K --> L[End]
-Windows Instructions
+```mermaid
+graph TD
+    A[Start] --> B[Install Conda]
+    B --> C[Create Conda Environment]
+    C --> D[Activate Conda Environment]
+    D --> E{GPU Available?}
+    E -->|Yes| F[Install PyTorch with GPU Support]
+    E -->|No| G[Install PyTorch for CPU]
+    F --> H[Clone Repository]
+    G --> H
+    H --> I[Install Dependencies]
+    I --> J[Run Inference]
+    J --> K[End]
+```
 
-1. Using Conda Environment
+a. Make sure Conda is installed on your system.
 
-Ensure Conda is installed on your system.
-Create a Conda Environment:
-bashCopyconda create --name virtualenv
+b. Create a Conda environment:
 
-Activate the Conda environment:
+```bash
+conda create --name virtualenv
+```
 
-Option 1: In VS Code Command Palette, select Python: Select Interpreter -> select virtualenv conda environment
-Option 2: In the terminal:
-bashCopyconda activate virtualenv
+c. Activate the Conda environment:
 
-Install PyTorch:
+- Option 1: In the command palette, select Python: Select Interpreter -> select virtualenv conda environment
+- Option 2: In the terminal:
+  ```bash
+  conda activate virtualenv
+  ```
 
-For CPU:
-bashCopyconda install pytorch torchvision cpuonly -c pytorch
+d. Install PyTorch:
 
-For GPU:
-bashCopyconda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+- For CPU:
+  ```bash
+  conda install pytorch torchvision cpuonly -c pytorch
+  ```
+- For GPU:
+  ```bash
+  conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+  ```
 
-Clone the repository:
-bashCopygit clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
+e. Clone the repository:
 
-Navigate to the project directory:
-bashCopycd CCTV_footage_detection
+```bash
+git clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
+```
 
-Install dependencies:
-bashCopypip install -r requirements.txt
+f. Change to the project directory:
 
-Navigate to the inference folder:
-bashCopycd inference
+```bash
+cd CCTV_footage_detection
+```
 
-Run the inference:
-bashCopypython run_inference.py
+g. Install dependencies:
 
-2. Using Python Virtual Environment
+```bash
+pip install -r requirements.txt
+```
 
-Create a virtual environment:
-bashCopypython -m venv virtualenv
+h. Change to the inference folder:
 
-Activate the virtual environment:
-bashCopy.\virtualenv\Scripts\activate
+```bash
+cd inference
+```
 
-Follow steps 5-9 from the Conda instructions above.
+i. Run the inference:
 
-Linux Instructions
+```bash
+python run_inference.py
+```
 
-1. Using Conda Environment
+j. View the model results in the `data -> output` directory.
 
-Ensure Conda is installed on your system.
-Create a Conda Environment:
-bashCopyconda create --name virtualenv
+#### 2. Using Python Virtual Environment
 
-Activate the Conda environment:
-bashCopyconda activate virtualenv
+a. Create a virtual environment:
 
-Install PyTorch:
+```bash
+python -m venv virtualenv
+```
 
-For CPU:
-bashCopyconda install pytorch torchvision cpuonly -c pytorch
+b. Activate the virtual environment:
 
-For GPU:
-bashCopyconda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+```bash
+.\virtualenv\Scripts\activate
+```
 
-Clone the repository:
-bashCopygit clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
+c. Follow steps e-j from the Conda instructions above.
 
-Navigate to the project directory:
-bashCopycd CCTV_footage_detection
+### Linux
 
-Install dependencies:
-bashCopypip install -r requirements.txt
+#### 1. Using Conda Environment
 
-Navigate to the inference folder:
-bashCopycd inference
+a. Install Conda if not already installed.
 
-Run the inference:
-bashCopypython run_inference.py
+b. Create a Conda environment:
 
-2. Using Python Virtual Environment
+```bash
+conda create --name virtualenv
+```
 
-Create a virtual environment:
-bashCopypython3 -m venv virtualenv
+c. Activate the Conda environment:
 
-Activate the virtual environment:
-bashCopysource virtualenv/bin/activate
+```bash
+conda activate virtualenv
+```
 
-Follow steps 5-9 from the Conda instructions above.
+d. Install PyTorch:
 
-Mac Instructions
+- For CPU:
+  ```bash
+  conda install pytorch torchvision cpuonly -c pytorch
+  ```
+- For GPU:
+  ```bash
+  conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+  ```
 
-1. Using Conda Environment
+e. Clone the repository:
 
-Ensure Conda is installed on your system.
-Create a Conda Environment:
-bashCopyconda create --name virtualenv
+```bash
+git clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
+```
 
-Activate the Conda environment:
-bashCopyconda activate virtualenv
+f. Change to the project directory:
 
-Install PyTorch:
+```bash
+cd CCTV_footage_detection
+```
 
-For CPU:
-bashCopyconda install pytorch torchvision -c pytorch
+g. Install dependencies:
 
-For GPU (Mac with M1 chip):
-bashCopyconda install pytorch torchvision -c pytorch-nightly
+```bash
+pip install -r requirements.txt
+```
 
-Clone the repository:
-bashCopygit clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
+h. Change to the inference folder:
 
-Navigate to the project directory:
-bashCopycd CCTV_footage_detection
+```bash
+cd inference
+```
 
-Install dependencies:
-bashCopypip install -r requirements.txt
+i. Run the inference:
 
-Navigate to the inference folder:
-bashCopycd inference
+```bash
+python run_inference.py
+```
 
-Run the inference:
-bashCopypython run_inference.py
+j. View the model results in the `data -> output` directory.
 
-2. Using Python Virtual Environment
+#### 2. Using Python Virtual Environment
 
-Create a virtual environment:
-bashCopypython3 -m venv virtualenv
+a. Create a virtual environment:
 
-Activate the virtual environment:
-bashCopysource virtualenv/bin/activate
+```bash
+python3 -m venv virtualenv
+```
 
-Follow steps 5-9 from the Conda instructions above.
+b. Activate the virtual environment:
 
-Viewing Results
-After running the inference, you can find the model results in the data -> output directory.
+```bash
+source virtualenv/bin/activate
+```
+
+c. Follow steps e-j from the Conda instructions above.
+
+### macOS
+
+#### 1. Using Conda Environment
+
+a. Install Conda if not already installed.
+
+b. Create a Conda environment:
+
+```bash
+conda create --name virtualenv
+```
+
+c. Activate the Conda environment:
+
+```bash
+conda activate virtualenv
+```
+
+d. Install PyTorch:
+
+- For CPU:
+  ```bash
+  conda install pytorch torchvision -c pytorch
+  ```
+- For GPU (M1/M2 Macs):
+  ```bash
+  conda install pytorch torchvision -c pytorch
+  ```
+
+e. Clone the repository:
+
+```bash
+git clone https://github.com/ByteMeEthos/CCTV_footage_detection.git
+```
+
+f. Change to the project directory:
+
+```bash
+cd CCTV_footage_detection
+```
+
+g. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+h. Change to the inference folder:
+
+```bash
+cd inference
+```
+
+i. Run the inference:
+
+```bash
+python run_inference.py
+```
+
+j. View the model results in the `data -> output` directory.
+
+#### 2. Using Python Virtual Environment
+
+a. Create a virtual environment:
+
+```bash
+python3 -m venv virtualenv
+```
+
+b. Activate the virtual environment:
+
+```bash
+source virtualenv/bin/activate
+```
+
+c. Follow steps e-j from the Conda instructions above.
+
+## Additional Information
+
+For more details on the project, please refer to the documentation or contact the repository maintainers.
