@@ -1,206 +1,237 @@
-Here is the link to the technical documentation of the whole model and how it works.
-https://docs.google.com/document/d/15IG7hoI4URyP6Cvhs7bapI9m-8Fmvtq6vnfhs_BSA5U/edit?pli=1
+# **Facial Reconstruction from CCTV Footage**
 
-Technical Report: Facial Reconstruction from CCTV Footage
-Github:
-https://github.com/ByteMeEthos/CCTV_footage_detection
+## GITHUB - https://github.com/ByteMeEthos/CCTV_footage_detection
 
-0. Table of Contents
-   Abstract
-   Keywords
-   Dataset
-   Introduction
-   Literature review
-   Model Architecture and Design
-   Training Strategy
-   Image Enhancement Techniques
-   Additional Components
-   Implementation Details
-   Results and Analysis
-   Challenges and Solutions
-   Future Work
-   Conclusion
-   References
+## TECHNICAL REPORT - https://docs.google.com/document/d/15IG7hoI4URyP6Cvhs7bapI9m-8Fmvtq6vnfhs_BSA5U/edit?usp=drive_link
 
-1. Abstract
-   This technical report presents a proof of concept for an advanced AI model designed to reconstruct and enhance facial images from low-quality CCTV footage. Addressing critical challenges in law enforcement and security, our research focuses on improving facial recognition accuracy in surveillance applications. The model employs a Generative Adversarial Network (GAN) architecture, specifically a Pix2Pix framework with a U-Net-based generator optimized for image-to-image translation tasks.
-   Our approach combines machine learning techniques with traditional image processing methods, including super-resolution, noise reduction, and deblurring. The model's architecture incorporates both pixel-wise and perceptual loss functions, utilizing VGG16 for feature extraction. Quantitative evaluation metrics, including Peak Signal-to-Noise Ratio (PSNR) and Structural Similarity Index (SSIM), demonstrated significant improvements in image quality. Qualitative assessments revealed enhanced sharpness, detail preservation, and artifact reduction in reconstructed facial images.
-   Key challenges addressed include model training complexity, dataset limitations, and hyperparameter optimization. Future work will focus on integrating YOLO v8n for improved face detection, developing real-time video processing capabilities, and exploring 3D facial reconstruction techniques. This research contributes to the field of video surveillance and forensic analysis by significantly enhancing the quality of facial images from CCTV footage, potentially improving the accuracy of facial recognition systems, and aiding in criminal investigations.
+## Table of Contents
 
-2. Keywords
-   Convolutional Neural Networks (CNNs)
-   PyTorch
-   Eigenfaces
-   Haar Cascades
-   Softmax Function
-   Batch Normalization
-   Hyperparameter Tuning
-   Distance Metrics (e.g., Euclidean Distance, Cosine Similarity)
-   VGG16
-   U-Net
-   YOLO (You Only Look Once)
-   Dlib
-   Generative Adversarial Networks (GANs)
-
-3. Dataset
-
-SCface is a database of static images of human faces. Images were taken in an uncontrolled indoor environment using five video surveillance cameras of various qualities. Database contains 4160 static images (in visible and infrared spectrum) of 130 subjects. Images from different quality cameras mimic the real-world conditions and enable robust face recognition algorithm testing, emphasizing different law enforcement and surveillance use case scenarios.
-SCface link: https://www.scface.org/
-Dataset link: https://www.kaggle.com/datasets/yazkarajih/scface
-
-4. Introduction
-   This project focuses on developing a Proof of Concept (POC) for a machine learning model capable of reconstructing and enhancing facial images from low-quality CCTV footage. Our aim is to address the critical challenges faced by law enforcement and security agencies in identifying individuals from poor-quality surveillance video.
-   4.1 Core Objectives
-   Basic Facial Reconstruction Model:
-   Develop a machine learning model to reconstruct and enhance facial images from low-quality CCTV footage.
-   Focus on solving core challenges, particularly:
-   Improving clarity in low-light conditions
-   Addressing motion-blur issues
-   Image Enhancement Techniques:
-   Apply and integrate basic image processing methods to improve facial image quality, including:
-   Super-resolution
-   Noise reduction
-   Deblurring
-   Results Comparison and Evaluation:
-   Provide side-by-side comparisons of original CCTV footage and enhanced images.
-   Develop metrics for quantitative evaluation of image improvement.
-   4.2 Significance
-   This project addresses a critical need in the field of video surveillance and forensic analysis. By enhancing the quality of facial images from CCTV footage, we aim to significantly improve the accuracy of facial recognition systems and aid in criminal investigations.
+1. **Abstract**
+2. **Keywords**
+3. **Dataset**
+4. **Introduction**
+   4.1 Core Objectives  
+   4.2 Significance  
    4.3 Approach
-   Our approach combines advanced machine learning techniques with traditional image processing methods. By leveraging the strengths of both, we aim to create a robust system capable of handling a variety of real-world scenarios, from low-light environments to fast-moving subjects.
-
-5. Literature Review:
-   5.1 Introduction and Traditional Methods
-   Facial reconstruction from low-quality CCTV footage has become increasingly important in law enforcement and security applications (Wang et al., 2014). Early approaches relied on traditional image processing methods such as super-resolution, denoising, and deblurring (Park et al., 2003; Buades et al., 2005). However, these techniques often struggled with complex, real-world scenarios presented by surveillance footage.
-   5.2 Machine Learning Approaches
-   The advent of deep learning has revolutionized facial reconstruction techniques:
-   Convolutional Neural Networks (CNNs): Dong et al. (2016) introduced SRCNN, demonstrating superior performance in image super-resolution.
-   Generative Adversarial Networks (GANs): Ledig et al. (2017) proposed SRGAN for photo-realistic super-resolution, while Wang et al. (2018) further improved visual quality with ESRGAN.
-   Face-Specific Models: Chen et al. (2018) developed FSRNet, leveraging facial landmarks for enhanced reconstruction.
-   Image-to-Image Translation: Isola et al. (2017) introduced Pix2Pix, a conditional GAN framework adaptable to various image enhancement tasks.
-   5.3 Challenges in CCTV Facial Reconstruction
-   Despite significant progress, several challenges persist:
-   Low-light conditions resulting in noisy, low-contrast images (Lore et al., 2017)
-   Motion blur from fast-moving subjects (Su et al., 2017)
-   Low resolution limiting available facial details (Yang et al., 2018)
-   Pose variation in non-frontal face images (Zhao et al., 2019)
-   5.4 Ethical Considerations
-   As these technologies advance, ethical and privacy concerns have been raised (Brey, 2004; Bromby and Macmillan, 2007), emphasizing the need for responsible development and application of facial reconstruction technologies.
-
-5.5 Conclusion
-While significant advancements have been made in facial reconstruction from CCTV footage, particularly through deep learning techniques, challenges remain in dealing with real-world surveillance conditions. Ongoing research continues to push the boundaries, balancing technological progress with ethical considerations.
-
-6. Model Architecture and Design
-   6.1 Overview
-   Our facial reconstruction model employs a Generative Adversarial Network (GAN) architecture, specifically utilizing a Pix2Pix framework with a U-Net-based generator. This design is optimized for image-to-image translation tasks, making it well-suited for enhancing low-quality CCTV footage.
-   6.2 Generator Architecture
-   6.2.1 U-Net Structure
-   Based on the U-Net architecture, known for its effectiveness in image segmentation and reconstruction tasks.
-   Consists of multiple downsampling and upsampling blocks, preserving spatial information through skip connections.
-   The first two downsampling blocks are initially frozen to maintain early spatial information and stabilize training.
-   6.2.2 Layer Configuration
-   The exact number of layers is dependent on the specific U-Net implementation.
-   Utilizes 64 channels (64C) in hidden layers, balancing model capacity and computational efficiency.
-   6.2.3 Loss functions
-   6.2.3.1 Pixel-wise Loss
-   Implements L1 loss for direct pixel-to-pixel comparison between generated and target images.
-
-6.2.3.2 Perceptual Loss
-Utilizes VGG16 as the backbone for perceptual loss computation.
-Extracts features from the first 31 layers of a pre-trained VGG16 model.
-VGG model is set to evaluation mode with frozen parameters, serving as a fixed feature extractor.
-
-7. Training Strategy
-   7.1 Optimizer
-   Utilizes the Adam optimizer, known for its efficiency in handling sparse gradients and noisy data.
-   Implemented with a lower learning rate to ensure stable training and prevent overshooting optimal parameters.
-   Specific learning rate value to be added from the project repository.
-   7.2 Learning Rate Scheduler
-   Implements StepLR for gradual learning rate reduction at specified intervals.
-   This approach helps in fine-tuning the model as training progresses, allowing for more precise parameter updates in later stages.
-   Details to be added from the project repository: "Repo dekh and amra je lr r je scheduler use korechi segulo add kor" (Look at the repo and add the learning rate and scheduler we used).
-   Include specifics such as step size and decay factor once retrieved from the repository.
-   7.3 Gradient Control
-   Employs a custom set_requires_grad function for selective layer freezing and unfreezing.
-   This technique allows for incremental learning and fine-tuning of specific parts of the network.
-   Particularly useful in transfer learning scenarios or when adapting pre-trained models.
-   Describe the specific layers or sections of the model that were frozen/unfrozen during different training phases.
-   7.4 Training Duration and Hardware
-   7.4.1 Primary training hardware: NVIDIA GeForce RTX 3050 GPU
-   The RTX 3050 is an entry-level GPU in the RTX 30 series, based on the Ampere architecture.
-   Specifications:
-   CUDA Cores: 2560
-   Tensor Cores: 80 (3rd generation)
-   RT Cores: 20 (2nd generation)
-   Base Clock: 1552 MHz
-   Boost Clock: 1777 MHz
-   Memory: 8GB GDDR6
-   Memory Interface: 128-bit
-   Memory Bandwidth: 224 GB/s
-   7.4.2 Total training time: Approximately 12 hours on the RTX 3050
-   This duration suggests a moderate model size or dataset, given the GPU's capabilities.
-   7.4.3 Performance considerations:
-   The RTX 3050's 8GB VRAM may have imposed limitations on batch size or model complexity.
-   Tensor cores likely accelerated training, especially for operations involving matrix multiplications.
-   RT cores, while primarily for ray tracing, may have provided some benefit in certain computational tasks.
-   7.4.4 Optimization strategies for RTX 3050:
-   Likely used mixed precision training (FP16) to leverage Tensor cores and reduce memory usage.
-   Possibly employed gradient accumulation if larger effective batch sizes were needed.
-   May have used NVIDIA's CUDA Deep Neural Network library (cuDNN) for optimized performance.
-   7.4.5 Additional system specifications (to be filled in):
-   CPU model and specifications
-   System RAM
-   Storage type (SSD/HDD) used for dataset and model checkpoints
-   7.4.6 Training environment:
-   Specify the deep learning framework used (e.g., PyTorch, TensorFlow)
-   Note any containerization (e.g., Docker) or virtual environment setups
-   7.4.7 Scalability considerations:
-   Discuss any multi-GPU training attempts or plans for scaling to more powerful hardware in future iterations
-
-7.5 Batch Size and Metrics
-Specify the batch size used during training. This impacts both training speed and model generalization.
-List and describe the metrics used to evaluate model performance during training. Common metrics might include:
-Loss functions (e.g., L1 loss, perceptual loss)
-Image quality metrics (e.g., PSNR, SSIM)
-Any custom evaluation metrics specific to facial reconstruction
-7.6 Image Enhancement Techniques
-Detail the enhancement methods used during training: "Enhancement er jonno ja ja use hoyeche" (What was used for enhancement)
-This may include:
-Data augmentation techniques (e.g., rotations, flips, color jittering)
-Pre-processing steps (e.g., noise reduction, contrast enhancement)
-Any domain-specific enhancements for facial images
-7.7 Code Management and Explanation
-Reference to GitHub repository containing the complete codebase.
-Note on using GPT for code explanation: "GitHub e ka code copy kor claud ba gpt diye explain kore ne" (Copy the code from GitHub and get it explained by Claude or GPT)
-Consider adding:
-Key code snippets with explanations
-Workflow diagrams to illustrate the training process
-Any configuration files or hyperparameter settings
-7.8 Checkpointing and Model Saving
-Describe the strategy for saving model checkpoints during training.
-Specify the frequency of checkpoint saves and criteria for selecting the best model.
-Discuss any strategies for resuming training from checkpoints if interrupted.
-7.9 Validation Strategy
-Outline the approach for model validation during training.
-Describe the validation dataset and its relationship to the training data.
-Explain how validation results were used to guide training decisions (e.g., early stopping, hyperparameter tuning).
-
-8. Image Enhancement Techniques
-   8.1 Preprocessing
-   Includes noise reduction and Gaussian smoothing (specific parameters not provided).
-   Implements horizontal rotation/flip for data augmentation.
-   8.2 Real-time Processing
-   Converts video input to individual image frames for processing.
-9. Additional Components
-   9.1 Face Detection
-   Plans to integrate YOLO v8n for accurate face detection in input images (future implementation).
-   9.2 GAN Framework
-   Utilizes the GAN architecture for realistic image enhancement.
-   Generator (U-Net) trained to transform low-resolution to high-resolution images.
-   The combined loss function incorporates both pixel-wise accuracy and perceptual quality.
+5. **Literature Review**
+   5.1 Introduction and Traditional Methods  
+   5.2 Machine Learning Approaches  
+   5.3 Challenges in CCTV Facial Reconstruction  
+   5.4 Ethical Considerations  
+   5.5 Conclusion
+6. **Model Architecture and Design**
+   6.1 Overview  
+   6.2 Generator Architecture  
+   6.2.1 U-Net Structure  
+   6.2.2 Layer Configuration  
+   6.2.3 Loss Functions
+7. **Training Strategy**
+   7.1 Optimizer  
+   7.2 Learning Rate Scheduler  
+   7.3 Gradient Control  
+   7.4 Training Duration and Hardware  
+   7.5 Batch Size and Metrics  
+   7.6 Image Enhancement Techniques  
+   7.7 Code Management and Explanation  
+   7.8 Checkpointing and Model Saving  
+   7.9 Validation Strategy
+8. **Image Enhancement Techniques**
+   8.1 Preprocessing  
+   8.2 Real-Time Processing
+9. **Additional Components**
+   9.1 Face Detection  
+   9.2 GAN Framework  
    9.3 Training Monitoring
-   Periodic saving of generated images to track training progress.
-   Model checkpointing every 10 epochs for progress saving and potential training resumption.
+
+---
+
+## **1. Abstract**
+
+This technical report presents a proof of concept for an advanced AI model designed to reconstruct and enhance facial images from low-quality CCTV footage. Addressing critical challenges in law enforcement and security, our research focuses on improving facial recognition accuracy in surveillance applications. The model employs a Generative Adversarial Network (GAN) architecture, specifically a **Pix2Pix** framework with a **U-Net**-based generator optimized for image-to-image translation tasks.
+
+Our approach combines machine learning techniques with traditional image processing methods, including **super-resolution**, **noise reduction**, and **deblurring**. The model's architecture incorporates both **pixel-wise** and **perceptual loss functions**, utilizing **VGG16** for feature extraction. **Quantitative evaluation metrics** like **Peak Signal-to-Noise Ratio (PSNR)** and **Structural Similarity Index (SSIM)** demonstrate significant improvements in image quality. Qualitative assessments revealed enhanced **sharpness**, **detail preservation**, and **artifact reduction** in reconstructed facial images.
+
+Key challenges addressed include model training complexity, dataset limitations, and hyperparameter optimization. Future work will focus on integrating **YOLO v8n** for improved face detection, developing real-time video processing capabilities, and exploring **3D facial reconstruction techniques**.
+
+---
+
+## **2. Keywords**
+
+- **Convolutional Neural Networks (CNNs)**
+- **PyTorch**
+- **Eigenfaces**
+- **Haar Cascades**
+- **Softmax Function**
+- **Batch Normalization**
+- **Hyperparameter Tuning**
+- **Distance Metrics (e.g., Euclidean Distance, Cosine Similarity)**
+- **VGG16**
+- **U-Net**
+- **YOLO (You Only Look Once)**
+- **Dlib**
+- **Generative Adversarial Networks (GANs)**
+
+---
+
+## **3. Dataset**
+
+**SCface** is a database of static images of human faces. Images were taken in an uncontrolled indoor environment using five video surveillance cameras of various qualities. The database contains **4160 static images** (in visible and infrared spectrum) of **130 subjects**. These images from different quality cameras mimic real-world conditions and enable robust face recognition algorithm testing.
+
+- **SCface Link**: [SCface](https://www.scface.org/)
+- **Dataset Link**: [Kaggle - SCface Dataset](https://www.kaggle.com/datasets/yazkarajih/scface)
+
+---
+
+## **4. Introduction**
+
+This project focuses on developing a **Proof of Concept (POC)** for a machine learning model capable of reconstructing and enhancing facial images from low-quality CCTV footage.
+
+### 4.1 Core Objectives
+
+- **Basic Facial Reconstruction Model**: Develop a machine learning model to reconstruct and enhance facial images from low-quality CCTV footage.
+
+  - **Challenges**:
+    - Improving clarity in low-light conditions
+    - Addressing motion-blur issues
+
+- **Image Enhancement Techniques**: Apply and integrate basic image processing methods, including super-resolution, noise reduction, and deblurring.
+
+- **Results Comparison and Evaluation**: Provide side-by-side comparisons of original CCTV footage and enhanced images, using quantitative metrics.
+
+### 4.2 Significance
+
+This project addresses a critical need in **video surveillance** and **forensic analysis**, aiming to enhance the quality of facial images from CCTV footage to improve facial recognition systems.
+
+### 4.3 Approach
+
+Combining **machine learning** techniques with **image processing methods**, our approach seeks to create a robust system capable of handling real-world surveillance scenarios, from low-light environments to fast-moving subjects.
+
+---
+
+## **5. Literature Review**
+
+### 5.1 Introduction and Traditional Methods
+
+Early approaches to facial reconstruction from CCTV footage relied on **traditional image processing** techniques like **super-resolution**, **denoising**, and **deblurring** (Wang et al., 2014).
+
+### 5.2 Machine Learning Approaches
+
+The advent of **deep learning** introduced techniques like **Convolutional Neural Networks (CNNs)** and **Generative Adversarial Networks (GANs)** for more effective facial reconstruction.
+
+- **SRCNN** (Dong et al., 2016) showed promising results in image super-resolution.
+- **SRGAN** (Ledig et al., 2017) and **ESRGAN** (Wang et al., 2018) improved visual quality through GANs.
+- **FSRNet** (Chen et al., 2018) used facial landmarks to enhance reconstruction.
+- **Pix2Pix** (Isola et al., 2017) introduced a conditional GAN for image-to-image translation.
+
+### 5.3 Challenges in CCTV Facial Reconstruction
+
+Challenges include:
+
+- Low-light conditions (Lore et al., 2017)
+- Motion blur (Su et al., 2017)
+- Low resolution (Yang et al., 2018)
+- Pose variations in non-frontal faces (Zhao et al., 2019)
+
+### 5.4 Ethical Considerations
+
+Technologies like facial reconstruction raise **ethical** and **privacy concerns** (Brey, 2004).
+
+### 5.5 Conclusion
+
+While deep learning has made significant progress, challenges remain in real-world surveillance conditions, with a need for continued research and ethical considerations.
+
+---
+
+## **6. Model Architecture and Design**
+
+### 6.1 Overview
+
+The model uses a **Generative Adversarial Network (GAN)** architecture, specifically the **Pix2Pix framework** with a **U-Net-based generator** for image-to-image translation.
+
+### 6.2 Generator Architecture
+
+#### 6.2.1 U-Net Structure
+
+- Uses downsampling and upsampling blocks with **skip connections**.
+- Initial layers are frozen to maintain **spatial information**.
+
+#### 6.2.2 Layer Configuration
+
+- **64 channels** in hidden layers for balancing model capacity.
+
+#### 6.2.3 Loss Functions
+
+- **Pixel-wise Loss**: Implements **L1 loss** for direct pixel comparison.
+- **Perceptual Loss**: Uses **VGG16** for feature extraction with frozen parameters.
+
+---
+
+## **7. Training Strategy**
+
+### 7.1 Optimizer
+
+- **Adam optimizer** is employed with a **lower learning rate** for stable training.
+
+### 7.2 Learning Rate Scheduler
+
+- Implements **StepLR** for gradual learning rate reduction.
+
+### 7.3 Gradient Control
+
+- Uses a custom **set_requires_grad** function for **layer freezing** and **unfreezing**.
+
+### 7.4 Training Duration and Hardware
+
+- **Primary training hardware**: NVIDIA GeForce **RTX 3050 GPU**
+- **Training time**: Approximately **12 hours**.
+
+### 7.5 Batch Size and Metrics
+
+- Batch size and metrics like **PSNR** and **SSIM** are used for evaluation.
+
+### 7.6 Image Enhancement Techniques
+
+- **Data augmentation** techniques like rotations, flips, and contrast enhancements are applied.
+
+### 7.7 Code Management and Explanation
+
+- The code is maintained in a GitHub repository.
+
+### 7.8 Checkpointing and Model Saving
+
+- Checkpoints are saved every **10 epochs** for potential resumption of training.
+
+### 7.9 Validation Strategy
+
+- Validation is performed on a **separate dataset** and used to guide training decisions.
+
+---
+
+## **8. Image Enhancement Techniques**
+
+### 8.1 Preprocessing
+
+- Includes **noise reduction** and **Gaussian smoothing** for better image quality.
+
+### 8.2 Real-Time Processing
+
+- Converts **video input** to individual frames for processing.
+
+---
+
+## **9. Additional Components**
+
+### 9.1 Face Detection
+
+- Integration of **YOLO v8n** is planned for more accurate face detection.
+
+### 9.2 GAN Framework
+
+- The **GAN architecture** is used for image enhancement with a **U-Net generator**.
+
+### 9.3 Training Monitoring
+
+- **Generated images** are periodically saved to monitor progress.
 
 10. Implementation Details
     10.1 Generator Architecture (U-Net)
