@@ -246,6 +246,9 @@ For more details on the project, please refer to the technical report - https://
 ## For downloading the dataset : 
 Note : This is a LINUX command.
 ```bash
+cd CCTV_footage_detection
+```
+```bash
 ./prepare_dataset.sh
 ```
 
