@@ -254,6 +254,9 @@ cd CCTV_footage_detection
 
 The dataset will be stored in `data -> SCface` directory
 
+## For downloading the model required for the purpose : 
+Follow the readme.md file in the `models` directory
+
 ## Some of the model results - 
 
 ![Screenshot 2024-09-26 230629](https://github.com/user-attachments/assets/476f4b53-3c0a-4850-93cb-b856eb68ffd5)
