@@ -6,3 +6,5 @@ data/rgb&heatMap
 models/saved_models/best_stacked_model_refined.pth
 data/output
 src/models/__pycache__
+data/SCface
+data/scface.zip
