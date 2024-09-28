@@ -10,21 +10,6 @@ Choose the appropriate method based on your operating system and preferred envir
 
 #### 1. Using Conda Environment
 
-```mermaid
-graph TD
-    A[Start] --> B[Install Conda]
-    B --> C[Create Conda Environment]
-    C --> D[Activate Conda Environment]
-    D --> E{GPU Available?}
-    E -->|Yes| F[Install PyTorch with GPU Support]
-    E -->|No| G[Install PyTorch for CPU]
-    F --> H[Clone Repository]
-    G --> H
-    H --> I[Install Dependencies]
-    I --> J[Run Inference]
-    J --> K[End]
-```
-
 a. Make sure Conda is installed on your system.
 
 b. Create a Conda environment:
