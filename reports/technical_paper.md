@@ -165,11 +165,7 @@ The model uses a **Generative Adversarial Network (GAN)** architecture, specific
 
   #### 6.2.3.2.1 PSNR (Peak Signal-to-Noise Ratio)
 
-  PSNR is a measure of the ratio between the maximum possible signal power and the power of noise that affects the image. It is expressed as:
-
-  \[
-  \text{PSNR} = 10 \cdot \log\_{10}\left(\frac{\text{MAX}^2}{\text{MSE}}\right)
-  \]
+  PSNR is a measure of the ratio between the maximum possible signal power and the power of noise that affects the image. 
 
   Where `MAX` is the maximum possible pixel value and `MSE` (Mean Squared Error) is the pixel-wise difference between the predicted and ground truth images. A higher PSNR indicates less distortion (higher image quality).
 
@@ -184,12 +180,6 @@ The model uses a **Generative Adversarial Network (GAN)** architecture, specific
   ***
 
   #### 6.2.3.2.3 The Combined Loss
-
-  The combined loss function incorporates both PSNR and SSIM into a weighted formula:
-
-  \[
-  \text{Loss} = \alpha \cdot (1 - \text{SSIM}) + (1 - \alpha) \cdot \left( \frac{1}{\text{PSNR}} \right)
-  \]
 
   - The **SSIM** component ensures structural similarity between the reconstructed and original images, where \(1 - \text{SSIM}\) penalizes dissimilarity.
   - The **PSNR** component measures pixel-wise accuracy, where a lower MSE results in a higher PSNR and thus a lower loss.
@@ -260,14 +250,6 @@ The model uses a **Generative Adversarial Network (GAN)** architecture, specific
 ### Gaussian Blur
 
 A **Gaussian blur** filter is applied to the input images to reduce image noise and detail. This helps in smoothing out irregularities in the pixel values. The filter uses a **Gaussian function** to calculate the transformation of each pixel, effectively reducing high-frequency components (noise) while retaining low-frequency details.
-
-The transformation is represented as:
-
-\[
-G(x, y) = \frac{1}{2\pi\sigma^2} \cdot e^{-\frac{x^2 + y^2}{2\sigma^2}}
-\]
-
-Where:
 
 - \(G(x, y)\) is the Gaussian kernel,
 - \(\sigma\) is the standard deviation controlling the extent of the blur,
