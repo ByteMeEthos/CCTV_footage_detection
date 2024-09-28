@@ -243,6 +243,17 @@ c. Follow steps e-j from the Conda instructions above.
 
 For more details on the project, please refer to the technical report - https://docs.google.com/document/d/15IG7hoI4URyP6Cvhs7bapI9m-8Fmvtq6vnfhs_BSA5U/edit?usp=drive_link .
 
+## For downloading the dataset : 
+Note : This is a LINUX command.
+```bash
+cd CCTV_footage_detection
+```
+```bash
+./prepare_dataset.sh
+```
+
+The dataset will be stored in `data -> SCface` directory
+
 ## Some of the model results - 
 
 ![Screenshot 2024-09-26 230629](https://github.com/user-attachments/assets/476f4b53-3c0a-4850-93cb-b856eb68ffd5)
