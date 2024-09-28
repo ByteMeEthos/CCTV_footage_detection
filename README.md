@@ -242,3 +242,11 @@ c. Follow steps e-j from the Conda instructions above.
 ## Additional Information
 
 For more details on the project, please refer to the technical report - https://docs.google.com/document/d/15IG7hoI4URyP6Cvhs7bapI9m-8Fmvtq6vnfhs_BSA5U/edit?usp=drive_link .
+
+## Some of the model results - 
+
+![Screenshot 2024-09-26 230629](https://github.com/user-attachments/assets/476f4b53-3c0a-4850-93cb-b856eb68ffd5)
+![Screenshot 2024-09-28 002502](https://github.com/user-attachments/assets/a62abbcf-de67-437a-b90c-8f02a49355a0)
+![Screenshot 2024-09-28 002407](https://github.com/user-attachments/assets/a28606e0-e948-4d64-b8c1-74ecdaa317a9)
+![Screenshot 2024-09-28 002008](https://github.com/user-attachments/assets/822a90fc-55f6-4b04-aa13-7fa36a387be3)
+![Screenshot 2024-09-28 001827](https://github.com/user-attachments/assets/138a4287-e097-40c8-a613-8839612f97ae)
