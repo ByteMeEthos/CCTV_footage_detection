@@ -1,0 +1,8 @@
+data/raw/
+data/processed/
+.idea
+__pycache__
+data/rgb&heatMap
+models/saved_models/best_stacked_model_refined.pth
+data/output
+src/models/__pycache__
