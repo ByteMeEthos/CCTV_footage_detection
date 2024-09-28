@@ -256,4 +256,4 @@ c. Follow steps e-j from the Conda instructions above.
 
 ## Additional Information
 
-For more details on the project, please refer to the documentation or contact the repository maintainers.
+For more details on the project, please refer to the technical report - https://docs.google.com/document/d/15IG7hoI4URyP6Cvhs7bapI9m-8Fmvtq6vnfhs_BSA5U/edit?usp=drive_link .
